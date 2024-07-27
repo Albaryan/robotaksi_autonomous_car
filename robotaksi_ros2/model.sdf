@@ -1,0 +1,333 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+    <model name="robotaksi_ros2">
+        <link name="chassis">
+            <pose>-1.650 0 1.2</pose>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>2.500 1.1 1.2</size>
+                    </box>
+                </geometry>
+            </collision>
+
+            <visual name="visual">
+                <pose>1.650 0 -1.2</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://robotaksi/meshes/robotaksi.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+
+                </geometry>
+            </visual>
+
+            <inertial>
+                <mass>500</mass>
+                <inertia>
+                    <ixx>397.251041667</ixx>
+                    <iyy>110,416666667</iyy>
+                    <izz>387,667708333</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="fl_wheel">
+            <pose>-0.41 0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="fr_wheel">
+            <pose>-0.41 -0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="fr_joint" type="universal">
+            <parent>chassis</parent>
+            <child>fr_wheel</child>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-0.785</lower>
+                    <upper>0.785</upper>
+                </limit>
+            </axis>
+            <axis2>
+                <xyz>0 0 -1</xyz>
+            </axis2>
+        </joint>
+
+        <joint name="fl_joint" type="universal">
+            <parent>chassis</parent>
+            <child>fl_wheel</child>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-0.785</lower>
+                    <upper>0.785</upper>
+                </limit>
+            </axis>
+            <axis2>
+                <xyz>0 0 -1</xyz>
+            </axis2>
+        </joint>
+
+        <link name="rl_wheel">
+            <pose>-2.27 0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="rr_wheel">
+            <pose>-2.27 -0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="rr_joint" type="revolute">
+            <parent>chassis</parent>
+            <child>rr_wheel</child>
+            <axis>
+                <xyz>0 0 -1</xyz>
+            </axis>
+        </joint>
+
+        <joint name="rl_joint" type="revolute">
+            <parent>chassis</parent>
+            <child>rl_wheel</child>
+            <axis>
+                <xyz>0 0 -1</xyz>
+            </axis>
+        </joint>
+
+
+        <plugin name='ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
+
+            <update_rate>100.0</update_rate>
+
+            <front_left_joint>fl_joint</front_left_joint>
+            <front_right_joint>fr_joint</front_right_joint>
+            <rear_left_joint>rl_joint</rear_left_joint>
+            <rear_right_joint>rr_joint</rear_right_joint>
+            <left_steering_joint>fl_joint</left_steering_joint>
+            <right_steering_joint>fr_joint</right_steering_joint>
+
+            <max_steer>0.6458</max_steer>
+
+            <max_steering_angle>7.85</max_steering_angle>
+
+            <max_speed>10</max_speed>
+
+            <left_steering_pid_gain>1500 0 250</left_steering_pid_gain>
+            <left_steering_i_range>0 0</left_steering_i_range>
+            <right_steering_pid_gain>1500 0 250</right_steering_pid_gain>
+            <right_steering_i_range>0 0</right_steering_i_range>
+            <linear_velocity_pid_gain>125 0 1</linear_velocity_pid_gain>
+            <linear_velocity_i_range>0 0</linear_velocity_i_range>
+
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+            <publish_distance>true</publish_distance>
+
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>chassis</robot_base_frame>
+
+        </plugin>
+
+        <link name="hokuyo_link">
+            <sensor name="head_hokuyo_sensor" type="ray">
+                <always_on>true</always_on>
+                <visualize>true</visualize>
+                <pose>0 0 0.7 0 0</pose>
+                <update_rate>100</update_rate>
+                <ray>
+                    <scan>
+                        <horizontal>
+                            <samples>2000</samples>
+                            <resolution>0.2</resolution>
+                            <min_angle>-3.14</min_angle>
+                            <max_angle>3.14</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.15</min>
+                        <max>130.0</max>
+                        <resolution>0.5</resolution>
+                    </range>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </ray>
+                <plugin name="gazebo_ros_head_hokuyo_controller"
+                    filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <namespace>/lidar</namespace>
+                        <remapping>~/out:=data</remapping>
+                    </ros>
+                    <output_type>sensor_msgs/LaserScan</output_type>
+                    <frameName>hokuyo_link</frameName>
+                </plugin>
+            </sensor>
+        </link>
+
+        <joint name="hokuyo_joint" type="fixed">
+            <parent>chassis</parent>
+            <child>hokuyo_link</child>
+            <pose>0 0 0 0 0 0</pose>
+        </joint>
+
+
+        <link name="camera_link">
+            <pose relative_to="hokuyo_link">0 0 0.7 0 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <box>
+                        <size>0.1 0.1 0.1</size>
+                    </box>
+                </geometry>
+            </visual>
+            <sensor type="multicamera" name="camera_sensor">
+                <always_on>true</always_on>
+                <update_rate>100</update_rate>
+                <camera name="left">
+                    <pose>0 -0.12 0 0 0 0</pose>
+                    <horizontal_fov>1.9198621772</horizontal_fov>
+                    <vertical_fov>1.2217304764</vertical_fov>
+                    <image>
+                        <width>672</width>
+                        <height>376</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.3</near>
+                        <far>130</far>
+                    </clip>
+                </camera>
+                <camera name="right">
+                    <pose>0 0.12 0 0 0 0</pose>
+                    <horizontal_fov>1.9198621772</horizontal_fov>
+                    <vertical_fov>1.2217304764</vertical_fov>
+                    <image>
+                        <width>672</width>
+                        <height>376</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.3</near>
+                        <far>130</far>
+                    </clip>
+                </camera>
+                <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                    <ros>
+                        <namespace>zed_cam</namespace>
+                    </ros>
+                    <frameName>camera_link</frameName>
+                </plugin>
+            </sensor>
+        </link>
+
+        <joint name="camera_joint" type="fixed">
+            <parent>chassis</parent>
+            <child>camera_link</child>
+        </joint>
+
+
+    </model>
+</sdf>

@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<sdf version="1.7">
+    <model name="robotaksi">
+        <link name="chassis">
+            <pose>-1.650 0 1.2</pose>
+            <collision name="collision">
+                <geometry>
+                    <box>
+                        <size>2.500 1.1 1.2</size>
+                    </box>
+                </geometry>
+            </collision>
+
+            <visual name="visual">
+                <pose>1.650 0 -1.2</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://robotaksi/meshes/robotaksi.dae</uri>
+                        <scale>1 1 1</scale>
+                    </mesh>
+
+                </geometry>
+            </visual>
+
+            <inertial>
+                <mass>500</mass>
+                <inertia>
+                    <ixx>397.251041667</ixx>
+                    <iyy>110,416666667</iyy>
+                    <izz>387,667708333</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="fl_wheel">
+            <pose>-0.41 0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="fr_wheel">
+            <pose>-0.41 -0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="fr_joint" type="universal">
+            <parent>chassis</parent>
+            <child>fr_wheel</child>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-0.785</lower>
+                    <upper>0.785</upper>
+                </limit>
+            </axis>
+            <axis2>
+                <xyz>0 0 -1</xyz>
+            </axis2>
+        </joint>
+
+        <joint name="fl_joint" type="universal">
+            <parent>chassis</parent>
+            <child>fl_wheel</child>
+            <axis>
+                <xyz>0 1 0</xyz>
+                <limit>
+                    <lower>-0.785</lower>
+                    <upper>0.785</upper>
+                </limit>
+            </axis>
+            <axis2>
+                <xyz>0 0 -1</xyz>
+            </axis2>
+        </joint>
+
+        <link name="rl_wheel">
+            <pose>-2.27 0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <link name="rr_wheel">
+            <pose>-2.27 -0.48 0.145 1.57 0 0</pose>
+            <visual name="visual">
+                <geometry>
+                    <cylinder>
+                        <radius>0.29</radius>
+                        <length>0.07</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+
+            <collision name="collision">
+                <geometry>
+                    <sphere>
+                        <radius>0.29</radius>
+                    </sphere>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass>5</mass>
+                <inertia>
+                    <ixx>0.1682</ixx>
+                    <iyy>0.1682</iyy>
+                    <izz>0.1682</izz>
+                </inertia>
+            </inertial>
+        </link>
+
+        <joint name="rr_joint" type="revolute">
+            <parent>chassis</parent>
+            <child>rr_wheel</child>
+            <axis>
+                <xyz>0 0 -1</xyz>
+            </axis>
+        </joint>
+
+        <joint name="rl_joint" type="revolute">
+            <parent>chassis</parent>
+            <child>rl_wheel</child>
+            <axis>
+                <xyz>0 0 -1</xyz>
+            </axis>
+        </joint>
+    </model>
+</sdf>
