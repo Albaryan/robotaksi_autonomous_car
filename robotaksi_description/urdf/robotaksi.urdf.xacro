@@ -21,8 +21,8 @@
             </geometry>
             <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
         </visual>
-        <xacro:box_inertia m="250.0" l="${base_length}" w="${base_width}" h="${base_height}"
-            xyz="0 0 ${base_height / 2.0}" rpy="0 ${pi / 2.0} 0" />
+        <xacro:box_inertia m="500.0" l="${base_length*2}" w="${base_width*2}" h="${base_height*2}"
+            xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
         <collision>
             <geometry>
                 <box size="${base_length} ${base_width} ${base_height}" />
@@ -38,7 +38,7 @@
             </geometry>
             <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
         </visual>
-        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+        <xacro:cylinder_inertia m="30" r="${base_radius*2}" l="${wheel_length}"
             xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
 
         <collision>
@@ -56,7 +56,7 @@
             </geometry>
             <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
         </visual>
-        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+        <xacro:cylinder_inertia m="30" r="${base_radius*2}" l="${wheel_length}"
             xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
 
         <collision>
@@ -82,7 +82,7 @@
             </geometry>
             <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
         </visual>
-        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+        <xacro:cylinder_inertia m="30" r="${base_radius*2}" l="${wheel_length}"
             xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
 
         <collision>
@@ -109,7 +109,7 @@
             <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
         </visual>
 
-        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+        <xacro:cylinder_inertia m="30" r="${base_radius*2}" l="${wheel_length}"
             xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
 
         <collision>
@@ -178,6 +178,7 @@
 
     <xacro:include filename="robotaksi_gazebo.xacro" />
 
-    <!-- <xacro:include filename="ray.xacro" /> -->
+    <xacro:include filename="ray.xacro" />
+    <xacro:include filename="camera.xacro" />
 
 </robot>
