@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<robot name="robotaksi" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:include filename="common_properties.xacro" />
+
+    <xacro:property name="base_length" value="2.85" />
+    <xacro:property name="base_width" value="1.11" />
+    <xacro:property name="base_height" value="1.78" />
+    <xacro:property name="base_radius" value="0.3" />
+    <xacro:property name="wheel_length" value="0.07" />
+    <xacro:property name="wheel_z_offset" value="0.15" />
+    <xacro:property name="rear_wheel_x_offset" value="0.865" />
+    <xacro:property name="front_wheel_x_offset" value="1.0" />
+
+    <link name="base_footprint" />
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotaksi_description/meshes/robotaksi.dae" />
+            </geometry>
+            <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
+        </visual>
+        <xacro:box_inertia m="250.0" l="${base_length}" w="${base_width}" h="${base_height}"
+            xyz="0 0 ${base_height / 2.0}" rpy="0 ${pi / 2.0} 0" />
+        <collision>
+            <geometry>
+                <box size="${base_length} ${base_width} ${base_height}" />
+            </geometry>
+            <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
+        </collision>
+    </link>
+
+    <link name="rear_right_axle">
+        <visual>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </visual>
+        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+            xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+
+        <collision>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </collision>
+    </link>
+
+    <link name="rear_left_axle">
+        <visual>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </visual>
+        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+            xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+
+        <collision>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </collision>
+    </link>
+
+    <link name="front_right_steer">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0.003381 1.5929e-07 0.02162" />
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+
+    <link name="front_right_axle">
+        <visual>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </visual>
+        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+            xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+
+        <collision>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </collision>
+    </link>
+
+    <link name="front_left_steer">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0.003381 1.5929e-07 0.02162" />
+            <mass value="1" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
+    </link>
+
+    <link name="front_left_axle">
+        <visual>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </visual>
+
+        <xacro:cylinder_inertia m="20" r="${base_radius}" l="${wheel_length}"
+            xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+
+        <collision>
+            <geometry>
+                <cylinder radius="${base_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="${pi / 2.0} 0 0" />
+        </collision>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 ${base_radius-wheel_z_offset}" rpy="0 0 0" />
+    </joint>
+
+    <joint name="rear_right_axle_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="rear_right_axle" />
+        <origin
+            xyz="${-rear_wheel_x_offset} ${-(base_width / 2.0) + (wheel_length / 2.0)} ${wheel_z_offset}"
+            rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="rear_left_axle_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="rear_left_axle" />
+        <origin
+            xyz="${-rear_wheel_x_offset} ${(base_width / 2.0) - (wheel_length / 2.0)} ${wheel_z_offset}"
+            rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="front_right_steer_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="front_right_steer" />
+        <origin
+            xyz="${front_wheel_x_offset} ${-(base_width / 2.0) + (wheel_length / 2.0)} ${wheel_z_offset}"
+            rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="front_right_axle_joint" type="continuous">
+        <parent link="front_right_steer" />
+        <child link="front_right_axle" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <joint name="front_left_steer_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="front_left_steer" />
+        <origin
+            xyz="${front_wheel_x_offset} ${(base_width / 2.0) - (wheel_length / 2.0)} ${wheel_z_offset}"
+            rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="front_left_axle_joint" type="continuous">
+        <parent link="front_left_steer" />
+        <child link="front_left_axle" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <xacro:include filename="robotaksi_gazebo.xacro" />
+
+    <!-- <xacro:include filename="ray.xacro" /> -->
+
+</robot>
