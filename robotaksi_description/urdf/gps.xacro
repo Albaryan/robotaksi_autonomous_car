@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name='gps_link'>
+        <visual name='visual'>
+            <origin xyz="0 0 0.0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.05 0.1 0.05" />
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.1 0.1 0.1" />
+            </geometry>
+        </collision>
+
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+        </inertial>
+    </link>
+
+    <joint name="gps_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="gps_link" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+    </joint>
+
+
+    <gazebo reference="gps_link">
+        <sensor name="gps_sensor" type="gps">
+            <!-- ensure the sensor is active (required) -->
+            <always_on>true</always_on>
+            <update_rate>100</update_rate>
+            <plugin name="gps_plugin" filename="libgazebo_ros_gps_sensor.so">
+              <ros>
+                <!-- publish to /gps/data -->
+                <namespace>/gps</namespace>
+                <remapping>~/out:=data</remapping>
+                <remapping>~/vel:=velocity</remapping>
+              </ros>
+            </plugin>
+          </sensor>
+    </gazebo>
+
+</robot>
