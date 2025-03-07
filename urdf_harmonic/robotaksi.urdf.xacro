@@ -17,7 +17,7 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <mesh filename="package://simulation_2025/meshes/robotaksi.dae" />
+                <mesh filename="package://robotaksi_autonomous_car/meshes/robotaksi.dae" />
             </geometry>
             <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
         </visual>
@@ -177,7 +177,6 @@
     </joint>
 
     <xacro:include filename="robotaksi_gazebo.xacro" />
-
     <xacro:include filename="ray.xacro" />
     <xacro:include filename="camera.xacro" />
     <xacro:include filename="depth.xacro" />
