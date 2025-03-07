@@ -17,7 +17,7 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <mesh filename="package://robotaksi_description/meshes/robotaksi.dae" />
+                <mesh filename="package://robotaksi_classic/meshes/robotaksi.dae" />
             </geometry>
             <origin xyz="0 0 ${base_height / 2.0}" rpy="0 0 0" />
         </visual>
