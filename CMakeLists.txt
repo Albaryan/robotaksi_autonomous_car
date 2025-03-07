@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(robotaksi_classic)
+project(robotaksi_autonomous_car)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY urdf meshes launch
+  DIRECTORY urdf meshes
   DESTINATION share/${PROJECT_NAME}/
 )
 
@@ -21,7 +21,7 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
 )
 
-set(GAZEBO_MODEL_PATH $ENV{HOME}/.gazebo/models/robotaksi_classic)
+set(GAZEBO_MODEL_PATH $ENV{HOME}/.gazebo/models/robotaksi_autonomous_car)
 
 add_custom_target(COMMAND cmake -E make_directory ${GAZEBO_MODEL_PATH})
 
