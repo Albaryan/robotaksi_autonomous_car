@@ -21,13 +21,13 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
 )
 
-set(GAZEBO_MODEL_PATH $ENV{HOME}/.gazebo/models/robotaksi_autonomous_car)
+set(GAZEBO_MODEL_PATH $ENV{HOME}/.gazebo/models)
 
-add_custom_target(COMMAND cmake -E make_directory ${GAZEBO_MODEL_PATH})
+add_custom_target(COMMAND cmake -E make_directory ${GAZEBO_MODEL_PATH}/${PROJECT_NAME})
 
 install(DIRECTORY
   meshes
-  DESTINATION ${GAZEBO_MODEL_PATH}
+  DESTINATION ${GAZEBO_MODEL_PATH}/${PROJECT_NAME}
 )
 
 ament_package()
